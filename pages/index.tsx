@@ -38,8 +38,8 @@ export default function Home ({
      
         <Table data={fullData}></Table>
 
-        <h2 className={utilStyles.heading1Xl} >Median income per County at 2017</h2>
-        <p>Here we can see the media income per County at 2017. For the visualization was necesary to filter all rows by the year 2017</p>
+        <h2 className={utilStyles.heading1Xl} >Median income per County in 2017</h2>
+        <p>Here we can see the media income per County in 2017. For the visualization was necesary to filter all rows by the year 2017</p>
         <p className={utilStyles.obs}><i>Obs. For this visualization I use the <a href="https://formidable.com/open-source/victory/">Victory Framework </a> to make de barchart</i></p>
 
 
