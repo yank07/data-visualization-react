@@ -4,7 +4,7 @@ import utilStyles from '../styles/utils.module.css'
 import Link from 'next/link'
 import { GetStaticProps } from 'next'
 import fetch from 'node-fetch'
-import React from 'react'
+import React, { useState } from 'react'
 import Table from '../components/table'
 import BarChart from '../components/barChart'
  
@@ -14,15 +14,36 @@ import BarChart from '../components/barChart'
 
 
 export default function Home ({ 
-  fullData,
-  data2017,
+  initialData,
+ 
   
 }: {
-  fullData:Object[],
-  data2017:Object[]
+  initialData:Object[],
+ 
   
 }) {
 
+  const [fullData,setfullData] = useState(initialData)
+
+  const initialFilter = initialData.filter(item => item.year && item.year==2017);
+    for (let index = 0; index < initialFilter.length; index++) {
+      initialFilter[index].median_hh_inc_placeofresidence_ia = Number(initialFilter[index].median_hh_inc_placeofresidence_ia);
+     
+    } 
+  const [filtered,setFiltered] = useState(initialFilter)
+ 
+  const onYearChange = (event)=> { console.log(event.target.value)
+    
+   const filtered2 = initialData.filter(item => item.year && item.year==event.target.value);
+   setFiltered(filtered2)
+  
+  }
+  
+
+  
+
+  
+  
   return (
    
      
@@ -42,8 +63,15 @@ export default function Home ({
         <p>Here we can see the media income per County in 2017. For the visualization was necesary to filter all rows by the year 2017</p>
         <p className={utilStyles.obs}><i>Obs. For this visualization I use the <a href="https://formidable.com/open-source/victory/">Victory Framework </a> to make de barchart</i></p>
 
-
-        <BarChart data={data2017}></BarChart>
+        <select name="" id="" onChange={onYearChange}>
+          <option value="2017">2017</option>
+          <option value="2016">2016</option>
+          <option value="2015">2015</option>
+          <option value="2014">2014</option>
+          <option value="2013">2013</option>
+          <option value="2012">2012</option>
+        </select>
+        <BarChart data={filtered}></BarChart>
        
       </section>
     
@@ -58,17 +86,17 @@ export const getStaticProps: GetStaticProps = async () => {
   //const res = await fetch('https://data.bayareametro.gov/resource/kbci-qkrr.json')
   const res = await fetch('https://data.bayareametro.gov/resource/7e6t-2y8x.json')
   
-  const fullData = await res.json()
-  const data2017 = fullData.filter(item => item.year && item.year==2017);
-  for (let index = 0; index < data2017.length; index++) {
-    data2017[index].median_hh_inc_placeofresidence_ia = Number(data2017[index].median_hh_inc_placeofresidence_ia);
+  const initialData = await res.json()
+ 
+  for (let index = 0; index < initialData.length; index++) {
+    initialData[index].median_hh_inc_placeofresidence_ia = Number(initialData[index].median_hh_inc_placeofresidence_ia);
     
   }  
   return {
     props: {
 
-      fullData,
-      data2017,
+      initialData
+      
      
     }
   }

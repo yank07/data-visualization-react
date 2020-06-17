@@ -49,7 +49,7 @@ export default function Layout({
             
             <h1 className={utilStyles.heading2Xl}>{siteTitle}</h1>
             <p>This project presents basic data visualizacitions and data filtering using  data from <a href="https://open-data-demo.mtc.ca.gov/browse?tags=vital+signs">Vital Signs </a>   using <a href=""> Next.js</a> and <a href="https://formidable.com/open-source/victory/">Victory Framework </a>.
-             I fetched the data from the API <a href="'https://data.bayareametro.gov/resource/7e6t-2y8x.json">https://data.bayareametro.gov/resource/7e6t-2y8x.json</a>. 
+             I fetched the data from the API <a href="https://data.bayareametro.gov/resource/7e6t-2y8x.json">https://data.bayareametro.gov/resource/7e6t-2y8x.json</a>. 
              
             </p>
             <h3>Spended time, approach and process  </h3>
